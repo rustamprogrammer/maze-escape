@@ -102,7 +102,15 @@ Check renders its examples and overwrites the image with its last example. Run M
 
 ## Timing (Mission 7)
 
-Benchmark results will be inserted here.
+Measured with the unchanged Bench class: five runs per size, arithmetic mean in milliseconds. Command: java -Xmx2g -cp out Bench. Machine: AMD Ryzen 7 7435HS, 32 GiB RAM, Windows x64, OpenJDK 25.0.1. No other benchmark or stress test ran concurrently.
+
+| Maze | Kruskal, five runs (ms) | Mean (ms) | Prim, five runs (ms) | Mean (ms) |
+|---|---|---:|---|---:|
+| 100 x 100 | 17, 11, 10, 27, 26 | 18 | 25, 5, 12, 5, 6 | 11 |
+| 300 x 300 | 148, 99, 78, 67, 61 | 91 | 95, 85, 97, 102, 89 | 94 |
+| 1000 x 1000 | 1428, 1761, 1779, 1809, 1718 | 1699 | 2435, 2722, 2515, 2526, 2530 | 2546 |
+
+The means are rounded by the original Bench class from unrounded timings. See output/benchmark.txt for its raw console output. Increasing the side length by ten increases the number of cells by one hundred, so input growth must be compared with cell count rather than side length. For a grid both algorithms have O(n log n) time, consistent with the increasing work in sorting or heap operations; JIT warm-up, allocation, garbage collection and measurement noise also affect these short runs. Prim is slower on the largest case here, but these five runs on one machine do not establish a universal ranking.
 
 ## Complexity
 
