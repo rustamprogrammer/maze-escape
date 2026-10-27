@@ -1,7 +1,3 @@
-/**
- * Mission 7. Timing of Kruskal and Prim. Ready: you do not change it, you only run it and copy the numbers to README.md.
- * Run:  java -cp out Bench
- */
 public class Bench {
 
     public static void main(String[] args) {

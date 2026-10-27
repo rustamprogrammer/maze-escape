@@ -3,11 +3,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.*;
 
-/** Makes the personal files of one student: walls.txt (the maze) and slides.txt (one-way slides between cells).
- *  Usage: java MakeVariant.java STUDENT_ID [outdir]   (or: javac MakeVariant.java, then java MakeVariant STUDENT_ID)
- *  walls.txt:  first line "R C W", then W lines "a b w": a wall between the neighbouring cells a and b, w = cost of breaking it.
- *  slides.txt: first line "n S", then S lines "a b w": a one-way slide from cell a to cell b, w = time.
- *  Cells are numbered 0 .. R*C-1 row by row. Start = cell 0, exit = cell R*C-1. */
+ 
 public class MakeVariant {
     static final String SALT = "AITU-DAA-A3-MAZE-2026";
 
@@ -39,7 +35,7 @@ public class MakeVariant {
     public static void main(String[] args) throws Exception {
         String sid = args[0]; File out = new File(args.length > 1 ? args[1] : "."); out.mkdirs();
         Rng d = new Rng(sid, "dims"); int R = d.randint(8, 12), C = d.randint(8, 12), n = R * C;
-        // walls
+         
         Rng r = new Rng(sid, "walls"); List<int[]> ws = new ArrayList<>();
         for (int i = 0; i < R; i++) for (int j = 0; j < C; j++) {
             int u = i * C + j;
@@ -53,7 +49,7 @@ public class MakeVariant {
             w.println(R + " " + C + " " + ws.size());
             for (int i = 0; i < ws.size(); i++) w.println(ws.get(i)[0] + " " + ws.get(i)[1] + " " + cost.get(i));
         }
-        // slides
+         
         Rng s = new Rng(sid, "slides"); boolean dag = s.below(10) < 2; int k = dag ? n : s.randint(8, 12);
         int[] sizes = new int[k]; Arrays.fill(sizes, 1);
         if (!dag) {

@@ -3,16 +3,13 @@ import java.nio.file.*;
 import java.util.*;
 import javax.tools.*;
 
-/**
- * Compiles your program and checks it on the three examples.
- * Run from the project folder:   java tools/Check.java
- */
+ 
 public class Check {
 
     static final String[] MISSION = {"1", "1", "1", "2", "2", "3", "3", "3", "4", "4", "4", "5", "5"};
 
     public static void main(String[] args) throws Exception {
-        // 1. compile
+         
         List<String> files = new ArrayList<>();
         for (String dir : new String[]{"src"}) {
             try (var s = Files.list(Path.of(dir))) { s.filter(p -> p.toString().endsWith(".java")).forEach(p -> files.add(p.toString())); }
@@ -27,11 +24,11 @@ public class Check {
         }
         System.out.println("Compiles.");
 
-        // 2. Mission 0
+         
         System.out.println("\nMission 0, DisjointSetTest:");
         for (String line : run("DisjointSetTest")) System.out.println("  " + line);
 
-        // 3. examples
+         
         System.out.println("\nExamples:");
         boolean all = true;
         for (String name : new String[]{"tiny", "small", "dag"}) {

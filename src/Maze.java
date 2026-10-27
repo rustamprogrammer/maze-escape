@@ -1,18 +1,10 @@
-/**
- * Missions 1 and 2. Building the maze out of the walls.
- * A wall k joins the cells w.a()[k] and w.b()[k] and costs w.cost()[k]. Indexes start from 0,
- * the line number in walls.txt is the index + 1. The cells are connected by DisjointSet.
- */
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class Maze {
 
-    /**
-     * Mission 1. Take the walls in the order of the file. Break a wall when its two cells are in different sets.
-     * Returns the indexes of the broken walls, in the order of breaking.
-     */
+     
     public static int[] breakWalls(Input.Walls w) {
         DisjointSet sets = new DisjointSet(w.cells());
         int[] broken = new int[Math.max(0, w.cells() - 1)];
@@ -23,10 +15,7 @@ public class Maze {
         return Arrays.copyOf(broken, used);
     }
 
-    /**
-     * Mission 2. Kruskal: the same, but take the walls from the cheapest to the most expensive.
-     * Returns the indexes of the broken walls.
-     */
+     
     public static int[] cheapestMaze(Input.Walls w) {
         Integer[] order = new Integer[w.count()];
         for (int k = 0; k < order.length; k++) order[k] = k;
@@ -43,10 +32,7 @@ public class Maze {
         return Arrays.copyOf(broken, used);
     }
 
-    /**
-     * Mission 2. Prim with a priority queue. Returns the total cost of the cheapest maze.
-     * It must be equal to the total cost of cheapestMaze.
-     */
+     
     public static long primCost(Input.Walls w) {
         int n = w.cells();
         if (n == 0) return 0;
@@ -73,7 +59,7 @@ public class Maze {
         while (reached < n && !frontier.isEmpty()) {
             int k = frontier.remove();
             int a = w.a()[k], b = w.b()[k];
-            if (inTree[a] && inTree[b]) continue; // Stale edge inside the tree.
+            if (inTree[a] && inTree[b]) continue;  
             int next = inTree[a] ? b : a;
             inTree[next] = true;
             reached++;

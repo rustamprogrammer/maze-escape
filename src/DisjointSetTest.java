@@ -1,7 +1,3 @@
-/**
- * Checks of Mission 0. Run:  java -cp out DisjointSetTest
- * Add your own checks below: a large chain, a union of a set with itself, count after many unions.
- */
 public class DisjointSetTest {
 
     static int failed = 0;

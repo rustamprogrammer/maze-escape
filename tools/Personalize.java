@@ -3,14 +3,14 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.regex.*;
 
-/** Run from the repository root with JDK 17+: java tools/Personalize.java ID "Name" "Group". */
+ 
 public class Personalize {
     public static void main(String[] args) throws Exception {
         if (args.length < 1 || args[0].isBlank()) {
             System.out.println("Usage: java tools/Personalize.java STUDENT_ID \"Full name\" \"Group\"");
             return;
         }
-        String id = args[0]; // Keep the ID as a string to preserve leading zeroes.
+        String id = args[0];  
         String name = args.length > 1 ? args[1] : "Not supplied";
         String group = args.length > 2 ? args[2] : "Not supplied";
         Path bin = Path.of(System.getProperty("java.home"), "bin");

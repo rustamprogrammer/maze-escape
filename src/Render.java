@@ -3,10 +3,10 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
 
-/** Draws the maze to a PNG file. Ready to use, you do not need to change it. */
+ 
 public class Render {
 
-    /** Walls that are not broken are black lines, the way out is red, the start is green, the exit is blue. */
+     
     public static void draw(Input.Walls w, int[] broken, int[] path, String file) {
         try {
             int rows = w.rows(), cols = w.cols();
@@ -45,10 +45,7 @@ public class Render {
         }
     }
 
-    /**
-     * Writes a page you can open with a double click: your maze, with the numbers of your files on it.
-     * You can walk through the maze with the arrow keys. Ready to use.
-     */
+     
     public static void page(Input.Walls w, Input.Slides s, int[] broken, int[] path, int[] zoneOf, String file) {
         boolean[] open = new boolean[w.count()];
         for (int k : broken) open[k] = true;

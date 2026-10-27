@@ -1,8 +1,6 @@
 import java.util.*;
 
-/** Independent small-graph oracles and a deep-stack stress check.
- * Run after compilation: java -cp out tools/ExtraChecks.java [stress]
- */
+ 
 public class ExtraChecks {
     static void require(boolean ok, String message) {
         if (!ok) throw new AssertionError(message);
@@ -37,7 +35,7 @@ public class ExtraChecks {
         int n = w.cells();
         int[] broken = Maze.breakWalls(w);
         require(broken.length == n - 1, "spanning tree size");
-        // Exhaustively enumerate every subset of n-1 edges; connectivity uses reachability, not DSU.
+         
         long best = Long.MAX_VALUE;
         for (int mask = 0; mask < (1 << w.count()); mask++) {
             if (Integer.bitCount(mask) != n - 1) continue;
@@ -73,7 +71,7 @@ public class ExtraChecks {
         require(result.visited() == visited[0] && result.deadEnds() == dead, "DFS counts");
     }
 
-    // Recursion is confined to this oracle, which has at most six cells.
+     
     static boolean dfsOracle(int v, Input.Walls w, boolean[][] doors, boolean[] seen,
                              List<Integer> path, int[] visited) {
         seen[v] = true; visited[0]++; path.add(v);
@@ -117,7 +115,7 @@ public class ExtraChecks {
         for (int e = 0; e < s.count(); e++)
             require(zone[s.from()[e]] <= zone[s.to()[e]], "topological SCC numbering");
 
-        // Floyd-Warshall gives an independent minimum-cost oracle on the quotient graph.
+         
         long inf = Long.MAX_VALUE / 4;
         long[][] dist = new long[count][count];
         boolean[][] edge = new boolean[count][count];

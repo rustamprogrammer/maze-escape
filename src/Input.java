@@ -1,16 +1,16 @@
 import java.io.*;
 import java.util.*;
 
-/** Reading of walls.txt and slides.txt. Ready to use, you do not need to change it. */
+ 
 public class Input {
 
-    /** The maze: rows x cols cells, W inner walls. Wall number k (counting from 1 as in the file) is stored at index k - 1. */
+     
     public record Walls(int rows, int cols, int[] a, int[] b, int[] cost) {
         public int cells() { return rows * cols; }
         public int count() { return a.length; }
     }
 
-    /** The slides: n cells, S one-way slides from[i] -> to[i] that take time[i]. */
+     
     public record Slides(int n, int[] from, int[] to, int[] time) {
         public int count() { return from.length; }
     }

@@ -1,6 +1,6 @@
 import java.util.*;
 
-/** Makes a random maze of any size, for the timing in Mission 7. Ready to use. All costs are different, the order of the walls is shuffled. */
+ 
 public class Generator {
 
     public static Input.Walls generate(int rows, int cols, long seed) {

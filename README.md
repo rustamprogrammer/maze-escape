@@ -29,7 +29,7 @@ To generate personal data and update this report, preserving leading zeroes in t
 java tools/Personalize.java 250655 "Rustam Kabdolda" "YOUR_GROUP"
 ```
 
-This helper runs the original MakeVariant, compiles for Java 17, runs Main and updates the identity, dimensions, output, MST cost and picture. It does not upload anything. Main, Input, Graphs, Render, Generator and Bench are unchanged from the starter.
+This helper runs the original MakeVariant, compiles for Java 17, runs Main and updates the identity, dimensions, output, MST cost and picture. It does not upload anything. The logic of Main, Input, Graphs, Render, Generator and Bench is unchanged from the starter; comments were removed from all Java files at the student’s request.
 
 ## Program output
 
@@ -128,13 +128,35 @@ n is the number of cells; m is the number of walls for maze algorithms or slides
 
 ## Git and submission
 
-The local repository uses main with an initial starter commit and individual commits for Missions 0-5, followed by report and timing commits. No GitHub remote is configured; nothing has been submitted to Moodle.
+The local repository uses main with an initial starter commit and individual commits for Missions 0-5, followed by report and timing commits. Public repository: https://github.com/rustamprogrammer/maze-escape. Nothing has been submitted to Moodle by this workflow.
 
 1. The personal data for Student ID 250655 and name Rustam Kabdolda are generated. Fill in the group, which was not supplied.
 2. Review the implementation and rewrite answers as needed; retain an accurate AI-use note.
 3. Run Check, then Main; compare the final output with the report.
 4. Commit personalization and review changes with a descriptive message.
-5. Create a public GitHub repository, add its URL as origin and push main. Check the link without signing in.
+5. Verify the latest main branch at https://github.com/rustamprogrammer/maze-escape and check the link without signing in.
 6. Submit the repository link in Moodle before the deadline.
 
 The archive preserves the hidden .git directory and history. Extract hidden files too, and verify using git log --oneline.
+
+## Что делает каждый Java-файл
+
+Комментарии удалены из всех 15 Java-файлов; строковые литералы и HTML-шаблон сохранены.
+
+| Файл | Назначение |
+|---|---|
+| `src/Main.java` | Точка входа: читает данные, вызывает алгоритмы, сверяет стоимости MST, выводит 13 результатов и создаёт PNG/HTML. |
+| `src/Input.java` | Читает стены и слайды; записи Walls и Slides хранят размеры, концы рёбер и стоимости. |
+| `src/DisjointSet.java` | DSU: find со сжатием путей, union по размеру, connected и число компонент count. |
+| `src/DisjointSetTest.java` | Проверяет DSU, повторные объединения, счётчик групп и миллион элементов. |
+| `src/Maze.java` | Строит лабиринт в порядке файла, находит MST Краскалом и его стоимость Примом с очередью с приоритетом. |
+| `src/Graphs.java` | Создаёт списки открытых соседей клеток, исходящих и входящих слайдов. |
+| `src/Escape.java` | Итеративный DFS: путь к выходу, посещённые до нахождения выхода клетки и тупики. |
+| `src/Zones.java` | Итеративный Косарайю выделяет SCC; routes строит граф зон, находит длиннейшую цепочку и самый дешёвый маршрут. |
+| `src/Render.java` | Создаёт maze.png и интерактивную maze.html с путём, зонами, слайдами и управлением клавишами. |
+| `src/Generator.java` | Генерирует случайные графы стен для тестов и замеров производительности. |
+| `src/Bench.java` | Пять раз измеряет Краскала и Прима на 100x100, 300x300 и 1000x1000, выводит времена и среднее. |
+| `tools/MakeVariant.java` | Создаёт воспроизводимые персональные walls.txt и slides.txt по точному Student ID. |
+| `tools/Check.java` | Компилирует src, запускает тесты DSU и проверяет все 13 строк на tiny, small и dag. |
+| `tools/ExtraChecks.java` | Независимые проверки алгоритмов на малых случайных графах; stress проверяет миллион клеток. |
+| `tools/Personalize.java` | Компилирует проект, генерирует вариант по ID, запускает Main и обновляет данные студента, результаты README и изображения. |
