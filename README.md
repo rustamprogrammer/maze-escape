@@ -1,14 +1,14 @@
 # Assignment 3. Maze Escape
 
 <!-- identity:start -->
-Student ID: not supplied  
-Name: not supplied  
-Group: not supplied  
-Maze size: 2 x 2 (provided tiny example)
+Student ID: 250655  
+Name: Rustam Kabdolda  
+Group: Not supplied  
+Maze size: 11 x 8
 <!-- identity:end -->
 
 <!-- variant-status:start -->
-**Demonstration data only.** The files in data/ are copies of examples/tiny/. A personal variant requires the student's exact ID. These are not personal submission results.
+Personal data generated with the exact ID `250655`.
 <!-- variant-status:end -->
 
 ## Build and run
@@ -26,7 +26,7 @@ Main reads data/walls.txt and data/slides.txt without keyboard input, prints 13 
 To generate personal data and update this report, preserving leading zeroes in the ID:
 
 ```sh
-java tools/Personalize.java YOUR_EXACT_STUDENT_ID "Full name" "Group"
+java tools/Personalize.java 250655 "Rustam Kabdolda" "YOUR_GROUP"
 ```
 
 This helper runs the original MakeVariant, compiles for Java 17, runs Main and updates the identity, dimensions, output, MST cost and picture. It does not upload anything. Main, Input, Graphs, Render, Generator and Bench are unchanged from the starter.
@@ -35,19 +35,19 @@ This helper runs the original MakeVariant, compiles for Java 17, runs Main and u
 
 <!-- program-output:start -->
 ```text
-Broken: 3
-Kept: 1
-Last broken wall: 3
-MST cost: 31
-Heaviest broken wall: 17
-Path length: 2
-DFS visited: 3
-Dead ends: 2
-Zones: 3
-Largest zone: 2
+Broken: 87
+Kept: 70
+Last broken wall: 126
+MST cost: 29250
+Heaviest broken wall: 780
+Path length: 21
+DFS visited: 59
+Dead ends: 30
+Zones: 9
+Largest zone: 15
 Is DAG: 0
-Flow stages: 3
-Fastest route cost: 9
+Flow stages: 4
+Fastest route cost: 14
 ```
 <!-- program-output:end -->
 
@@ -68,7 +68,7 @@ There are n = R*C cells and m = R*(C-1) + C*(R-1) inner walls. Each accepted wal
 ### Mission 2. Kruskal and Prim
 
 <!-- mst-cost:start -->
-Kruskal = Prim = **31** on the provided tiny example.
+Kruskal = Prim = **29250**.
 <!-- mst-cost:end -->
 
 Kruskal accepts edges joining different DSU components in increasing cost order. Prim grows a tree from cell 0 using the cheapest edge to an unvisited cell and ignores stale heap entries. Both choices are safe by the cut property, so both produce an MST with the same total cost; distinct costs also make the MST unique.
@@ -130,7 +130,7 @@ n is the number of cells; m is the number of walls for maze algorithms or slides
 
 The local repository uses main with an initial starter commit and individual commits for Missions 0-5, followed by report and timing commits. No GitHub remote is configured; nothing has been submitted to Moodle.
 
-1. Generate data with the exact Student ID and fill in name and group using Personalize.
+1. The personal data for Student ID 250655 and name Rustam Kabdolda are generated. Fill in the group, which was not supplied.
 2. Review the implementation and rewrite answers as needed; retain an accurate AI-use note.
 3. Run Check, then Main; compare the final output with the report.
 4. Commit personalization and review changes with a descriptive message.
