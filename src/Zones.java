@@ -83,7 +83,31 @@ public class Zones {
      * [1] the cost of the cheapest route from the zone of cell 0 to the zone of the last cell.
      */
     public static long[] routes(Input.Slides s, int[] zoneOf, int zoneCount) {
-        // TODO
-        return new long[]{0, 0};
+        if (zoneCount == 0) return new long[]{0, 0};
+        List<Map<Integer, Integer>> graph = new ArrayList<>(zoneCount);
+        for (int z = 0; z < zoneCount; z++) graph.add(new HashMap<>());
+        for (int edge = 0; edge < s.count(); edge++) {
+            int from = zoneOf[s.from()[edge]], to = zoneOf[s.to()[edge]];
+            if (from != to) graph.get(from).merge(to, s.time()[edge], Integer::min);
+        }
+
+        int[] stages = new int[zoneCount];
+        Arrays.fill(stages, 1); // A longest chain may start in any zone.
+        long[] distance = new long[zoneCount];
+        Arrays.fill(distance, Long.MAX_VALUE);
+        distance[zoneOf[0]] = 0;
+        long longest = 1;
+        for (int from = 0; from < zoneCount; from++) {
+            longest = Math.max(longest, stages[from]);
+            for (Map.Entry<Integer, Integer> edge : graph.get(from).entrySet()) {
+                int to = edge.getKey();
+                stages[to] = Math.max(stages[to], stages[from] + 1);
+                if (distance[from] != Long.MAX_VALUE) {
+                    distance[to] = Math.min(distance[to], distance[from] + edge.getValue());
+                }
+            }
+        }
+        long cost = distance[zoneOf[s.n() - 1]];
+        return new long[]{longest, cost == Long.MAX_VALUE ? -1 : cost};
     }
 }
