@@ -6,6 +6,12 @@
  * of the slides that enter cell v (reversed graph). The lists hold slide numbers i; the cell at the other end is s.to()[i]
  * or s.from()[i].
  */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Zones {
 
     /**
@@ -19,8 +25,55 @@ public class Zones {
      * Is DAG in Main is 1 when the number of zones equals the number of cells (no cycle), so you do not need a separate check.
      */
     public static int[] kosaraju(Input.Slides s) {
-        // TODO
-        return new int[s.n()];
+        int n = s.n();
+        int[][] outgoing = Graphs.slidesFrom(s);
+        int[][] incoming = Graphs.slidesInto(s);
+        boolean[] seen = new boolean[n];
+        int[] stack = new int[n], nextEdge = new int[n], finished = new int[n];
+        int count = 0;
+        for (int start = 0; start < n; start++) {
+            if (seen[start]) continue;
+            int top = 0;
+            stack[0] = start;
+            seen[start] = true;
+            while (top >= 0) {
+                int v = stack[top];
+                if (nextEdge[v] == outgoing[v].length) {
+                    finished[count++] = v;
+                    top--;
+                } else {
+                    int edge = outgoing[v][nextEdge[v]++];
+                    int to = s.to()[edge];
+                    if (!seen[to]) {
+                        seen[to] = true;
+                        stack[++top] = to;
+                    }
+                }
+            }
+        }
+
+        int[] zoneOf = new int[n];
+        Arrays.fill(zoneOf, -1);
+        int zones = 0;
+        for (int i = count - 1; i >= 0; i--) {
+            int start = finished[i];
+            if (zoneOf[start] != -1) continue;
+            int size = 0;
+            stack[size++] = start;
+            zoneOf[start] = zones;
+            while (size > 0) {
+                int v = stack[--size];
+                for (int edge : incoming[v]) {
+                    int from = s.from()[edge];
+                    if (zoneOf[from] == -1) {
+                        zoneOf[from] = zones; // Mark on push: a cell enters the stack once.
+                        stack[size++] = from;
+                    }
+                }
+            }
+            zones++;
+        }
+        return zoneOf;
     }
 
     /**
